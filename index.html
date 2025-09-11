@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Syagrus - Ingeniería y Paisajismo</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
             --primary-color: #2e7d32; /* Verde principal similar al logo */
@@ -13,6 +14,7 @@
             --light-text: #f5f5f5; /* Texto claro */
             --background-light: #f9f9f9; /* Fondo claro */
             --white: #ffffff;
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
         
         * {
@@ -26,16 +28,23 @@
             color: var(--dark-text);
             background-color: var(--background-light);
             line-height: 1.6;
+            padding-top: 80px; /* Para compensar la navbar fija */
         }
         
-        /* Header y Navegación */
+        /* Header y Navegación - VERSIÓN MODERNIZADA */
         header {
             background-color: var(--white);
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.09);
             position: fixed;
             width: 100%;
             top: 0;
             z-index: 1000;
+            transition: var(--transition);
+        }
+        
+        header.scrolled {
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 5px 0;
         }
         
         .container {
@@ -53,37 +62,135 @@
         }
         
         .logo {
-            font-size: 24px;
-            font-weight: bold;
+            display: flex;
+            align-items: center;
+            font-size: 28px;
+            font-weight: 700;
             color: var(--primary-color);
             text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .logo:hover {
+            transform: scale(1.03);
         }
 
         .logoicon {
-            width: 40px;
-            height: 40px;
-            margin-right: 10px;
-            vertical-align: middle;
+            width: 45px;
+            height: 45px;
+            margin-right: 12px;
+            transition: var(--transition);
         }
         
+        .logo:hover .logoicon {
+            transform: rotate(5deg);
+        }
+        
+        /* Menú de Navegación Moderno */
         .nav-menu {
             display: flex;
             list-style: none;
+            gap: 10px;
         }
         
         .nav-menu li {
-            margin-left: 25px;
+            position: relative;
         }
         
         .nav-menu a {
             text-decoration: none;
             color: var(--dark-text);
-            font-weight: 500;
-            transition: color 0.3s;
+            font-weight: 600;
+            font-size: 1.1rem;
+            padding: 12px 20px;
+            border-radius: 50px;
+            transition: var(--transition);
+            position: relative;
+            display: inline-block;
         }
         
         .nav-menu a:hover {
             color: var(--primary-color);
+            background: rgba(46, 125, 50, 0.08);
+            transform: translateY(-2px);
+        }
+        
+        /* Efecto de subrayado animado */
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 3px;
+            bottom: 8px;
+            left: 50%;
+            background: var(--primary-color);
+            transition: var(--transition);
+            transform: translateX(-50%);
+            border-radius: 3px;
+        }
+        
+        .nav-menu a:hover::after {
+            width: 60%;
+        }
+        
+        /* Elemento activo */
+        .nav-menu a.active {
+            color: var(--primary-color);
+            background: rgba(46, 125, 50, 0.12);
+        }
+        
+        .nav-menu a.active::after {
+            width: 60%;
+        }
+        
+        /* Botón de menú móvil */
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--dark-text);
+            transition: var(--transition);
+        }
+        
+        .menu-toggle:hover {
+            color: var(--primary-color);
+        }
+        
+        /* Responsive */
+        @media (max-width: 900px) {
+            .menu-toggle {
+                display: block;
+            }
+            
+            .nav-menu {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background: var(--white);
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: center;
+                padding-top: 40px;
+                transition: var(--transition);
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            }
+            
+            .nav-menu.active {
+                left: 0;
+            }
+            
+            .nav-menu li {
+                margin: 15px 0;
+            }
+            
+            .nav-menu a {
+                font-size: 1.2rem;
+                padding: 15px 40px;
+            }
         }
         
         /* Hero Section */
@@ -96,7 +203,6 @@
             align-items: center;
             text-align: center;
             color: var(--light-text);
-            margin-top: 60px;
         }
         
         .hero-content {
@@ -127,6 +233,7 @@
             text-decoration: none;
             font-weight: bold;
             transition: background-color 0.3s;
+            cursor: pointer;
         }
         
         .btn:hover {
@@ -298,15 +405,75 @@
         }
         
         .form-group input,
-        .form-group textarea {
+        .form-group textarea,
+        .form-group select {
             width: 100%;
-            padding: 10px;
+            padding: 12px;
             border: 1px solid #ddd;
             border-radius: 4px;
+            font-size: 16px;
         }
         
         .form-group textarea {
             min-height: 150px;
+            resize: vertical;
+        }
+        
+        .send-options {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .btn-whatsapp {
+            background-color: #25D366;
+            flex: 1;
+        }
+        
+        .btn-email {
+            background-color: #EA4335;
+            flex: 1;
+        }
+        
+        .btn-whatsapp:hover {
+            background-color: #128C7E;
+        }
+        
+        .btn-email:hover {
+            background-color: #D93025;
+        }
+        
+        .form-message {
+            margin-top: 20px;
+            padding: 12px;
+            border-radius: 4px;
+            display: none;
+        }
+        
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+          .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+         @keyframes spin {
+            to { transform: rotate(360deg); }
         }
         
         /* Footer */
@@ -357,13 +524,11 @@
             padding-top: 20px;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
+
+        
         
         /* Responsive */
         @media (max-width: 768px) {
-            .nav-menu {
-                display: none;
-            }
-            
             .hero h1 {
                 font-size: 2rem;
             }
@@ -377,18 +542,27 @@
                 padding-right: 0;
                 margin-bottom: 30px;
             }
+            
+            .send-options {
+                flex-direction: column;
+            }
+
         }
     </style>
 </head>
 <body>
     <!-- Header -->
-    <header>
+    <header id="header">
         <div class="container">
             <nav class="navbar">
                 <a href="#" class="logo">
-                    <img src="assets/logo.png" alt="logo" class="logoicon">SYAGRUS</a>
-                <ul class="nav-menu">
-                    <li><a href="#inicio">Inicio</a></li>
+                    <img src="assets/logo.png" alt="logo" class="logoicon">SYAGRUS
+                </a>
+                <button class="menu-toggle" id="menuToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="#inicio" class="active">Inicio</a></li>
                     <li><a href="#nosotros">Nosotros</a></li>
                     <li><a href="#servicios">Servicios</a></li>
                     <li><a href="#equipo">Equipo</a></li>
@@ -527,29 +701,53 @@
                 <div class="contact-info">
                     <h3>Información de Contacto</h3>
                     <p>📍 Dirección: [Ingresar dirección]</p>
-                    <p>📞 Teléfono: [Ingresar teléfono]</p>
-                    <p>✉️ Email: [Ingresar email]</p>
+                    <p>📞 Teléfono: +54 9 11 2345-6789</p>
+                    <p>✉️ Email: info@syagrus.com</p>
                     <p>🌐 Instagram: @syagrus.ip</p>
+                    
+                    <div style="margin-top: 30px;">
+                        <h3>Horario de Atención</h3>
+                        <p>Lunes a Viernes: 8:00 - 18:00</p>
+                        <p>Sábados: 9:00 - 13:00</p>
+                    </div>
                 </div>
                 <div class="contact-form">
-                    <form>
+                    <form id="contactForm">
                         <div class="form-group">
-                            <label for="name">Nombre</label>
-                            <input type="text" id="name" required>
+                            <label for="name">Nombre completo *</label>
+                            <input type="text" id="name" name="name" required>
                         </div>
                         <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" id="email" required>
+                            <label for="email">Email *</label>
+                            <input type="email" id="email" name="email" required>
                         </div>
                         <div class="form-group">
-                            <label for="phone">Teléfono</label>
-                            <input type="tel" id="phone">
+                            <label for="phone">Teléfono *</label>
+                            <input type="tel" id="phone" name="phone" required>
                         </div>
                         <div class="form-group">
-                            <label for="message">Mensaje</label>
-                            <textarea id="message" required></textarea>
+                            <label for="service">Servicio de interés</label>
+                            <select id="service" name="service">
+                                <option value="">Seleccione un servicio</option>
+                                <option value="Nivelación de suelo">Nivelación de suelo</option>
+                                <option value="Parquizados">Parquizados</option>
+                                <option value="Colocación de césped">Colocación de césped</option>
+                                <option value="Fertilización de suelo">Fertilización de suelo</option>
+                                <option value="Arbolado urbano">Arbolado urbano</option>
+                                <option value="Diseño de paisaje">Diseño de paisaje</option>
+                                <option value="Otro">Otro</option>
+                            </select>
                         </div>
-                        <button type="submit" class="btn">Enviar Mensaje</button>
+                        <div class="form-group">
+                            <label for="message">Mensaje *</label>
+                            <textarea id="message" name="message" placeholder="Describa su proyecto o consulta..." required></textarea>
+                        </div>
+                        
+                        <div id="formMessage" class="form-message"></div>
+                        
+                        <button type="submit" id="submitBtn" class="btn">
+                            <i class="fas fa-paper-plane"></i> Enviar Consulta
+                        </button>
                     </form>
                 </div>
             </div>
@@ -575,10 +773,12 @@
                 </div>
                 <div class="footer-section">
                     <h3>Contacto</h3>
-                    <p>📞 [Teléfono]</p>
-                    <p>✉️ [Email]</p>
+                    <p>📞 +54 9 3624-590032</p>
+                    <p>✉️ ignafullstack@gmail.com</p>
                     <div class="social-links">
-                        <a href="https://www.instagram.com/syagrus.ip/" target="_blank">Instagram</a>
+                        <a href="https://www.instagram.com/syagrus.ip/" target="_blank">
+                            <i class="fab fa-instagram"></i> Instagram
+                        </a>
                     </div>
                 </div>
             </div>
@@ -587,5 +787,255 @@
             </div>
         </div>
     </footer>
+
+    <script>
+        // Toggle del menú móvil
+        const menuToggle = document.getElementById('menuToggle');
+        const navMenu = document.getElementById('navMenu');
+        
+        menuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            menuToggle.innerHTML = navMenu.classList.contains('active') ? 
+                '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+        });
+        
+        // Cerrar menú al hacer clic en un enlace (útil en móviles)
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+            });
+        });
+        
+        // Cambiar estilo al hacer scroll
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+        
+        // Resaltar elemento activo en el menú
+        const sections = document.querySelectorAll('.section');
+        const navLinks = document.querySelectorAll('.nav-menu a');
+        
+        window.addEventListener('scroll', () => {
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                
+                if (pageYOffset >= (sectionTop - 200)) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').substring(1) === current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Funcionalidad del formulario de contacto
+        const btnWhatsApp = document.getElementById('btnWhatsApp');
+        const btnEmail = document.getElementById('btnEmail');
+        
+        // Validar formulario
+        function validateForm() {
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            const message = document.getElementById('message').value.trim();
+            
+            if (!name || !email || !phone || !message) {
+                showMessage('Por favor, complete todos los campos obligatorios.', 'error');
+                return false;
+            }
+            
+            if (!isValidEmail(email)) {
+                showMessage('Por favor, ingrese un email válido.', 'error');
+                return false;
+            }
+            
+            return true;
+        }
+        
+        function isValidEmail(email) {
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(email);
+        }
+        
+        function showMessage(text, type) {
+            formMessage.textContent = text;
+            formMessage.className = 'form-message ' + type;
+            formMessage.style.display = 'block';
+            
+            // Ocultar mensaje después de 5 segundos
+            setTimeout(() => {
+                formMessage.style.display = 'none';
+            }, 5000);
+        }
+        
+        // Enviar por WhatsApp
+        btnWhatsApp.addEventListener('click', () => {
+            if (!validateForm()) return;
+            
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            const service = document.getElementById('service').value;
+            const message = document.getElementById('message').value.trim();
+            
+            // Número de teléfono de la empresa (cambiar por el número real)
+            const businessPhone = '5493624590032';
+            
+            // Crear mensaje para WhatsApp
+            let whatsappMessage = `Hola, me interesa solicitar información sobre sus servicios.\n\n`;
+            whatsappMessage += `*Nombre:* ${name}\n`;
+            whatsappMessage += `*Email:* ${email}\n`;
+            whatsappMessage += `*Teléfono:* ${phone}\n`;
+            if (service) whatsappMessage += `*Servicio de interés:* ${service}\n`;
+            whatsappMessage += `*Mensaje:* ${message}`;
+            
+            // Codificar el mensaje para URL
+            const encodedMessage = encodeURIComponent(whatsappMessage);
+            
+            // Abrir WhatsApp
+            window.open(`https://wa.me/${businessPhone}?text=${encodedMessage}`, '_blank');
+            
+            showMessage('Redirigiendo a WhatsApp... Complete el envío del mensaje allí.', 'success');
+        });
+        
+        // Enviar por Email
+        btnEmail.addEventListener('click', () => {
+            if (!validateForm()) return;
+            
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            const service = document.getElementById('service').value;
+            const message = document.getElementById('message').value.trim();
+            
+            // Email de la empresa (cambiar por el email real)
+            const businessEmail = 'ignafullstack@gmail.com';
+            
+            // Asunto del email
+            const subject = `Consulta de ${name} - Syagrus`;
+            
+            // Cuerpo del email
+            let emailBody = `Nombre: ${name}\n`;
+            emailBody += `Email: ${email}\n`;
+            emailBody += `Teléfono: ${phone}\n`;
+            if (service) emailBody += `Servicio de interés: ${service}\n`;
+            emailBody += `Mensaje:\n${message}`;
+            
+            // Codificar para mailto
+            const encodedSubject = encodeURIComponent(subject);
+            const encodedBody = encodeURIComponent(emailBody);
+            
+            // Abrir cliente de email
+            window.location.href = `mailto:${businessEmail}?subject=${encodedSubject}&body=${encodedBody}`;
+            
+            showMessage('Abriendo cliente de correo... Complete el envío del email allí.', 'success');
+        });
+
+         // [Todo el JavaScript anterior para el menú]
+        
+        // Configuración para n8n - Reemplaza con tu webhook URL
+        const N8N_WEBHOOK_URL = 'https://ignafull.app.n8n.cloud/webhook/syagrus-contact';
+        
+        // Form submission con n8n
+        const contactForm = document.getElementById('contactForm');
+        const formMessage = document.getElementById('formMessage');
+        const submitBtn = document.getElementById('submitBtn');
+        const originalBtnText = submitBtn.innerHTML;
+        
+        contactForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            if (!validateForm()) return;
+            
+            // Mostrar estado de carga
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<span class="loading"></span> Enviando...';
+            
+            try {
+                // Recopilar datos del formulario
+                const formData = {
+                    name: document.getElementById('name').value.trim(),
+                    email: document.getElementById('email').value.trim(),
+                    phone: document.getElementById('phone').value.trim(),
+                    service: document.getElementById('service').value,
+                    message: document.getElementById('message').value.trim(),
+                    date: new Date().toLocaleString('es-AR'),
+                    source: 'Syagrus Website'
+                };
+                
+                // Enviar a n8n
+                const response = await fetch(N8N_WEBHOOK_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData)
+                });
+                
+                if (response.ok) {
+                    showMessage('¡Consulta enviada con éxito! Te contactaremos pronto.', 'success');
+                    contactForm.reset();
+                } else {
+                    throw new Error('Error en el servidor');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                showMessage('Error al enviar el mensaje. Por favor, intentá nuevamente.', 'error');
+            } finally {
+                // Restaurar botón
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalBtnText;
+            }
+        });
+        
+        // Validar formulario (función existente)
+        function validateForm() {
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            const message = document.getElementById('message').value.trim();
+            
+            if (!name || !email || !phone || !message) {
+                showMessage('Por favor, complete todos los campos obligatorios.', 'error');
+                return false;
+            }
+            
+            if (!isValidEmail(email)) {
+                showMessage('Por favor, ingrese un email válido.', 'error');
+                return false;
+            }
+            
+            return true;
+        }
+        
+        function isValidEmail(email) {
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(email);
+        }
+        
+        function showMessage(text, type) {
+            formMessage.textContent = text;
+            formMessage.className = 'form-message ' + type;
+            formMessage.style.display = 'block';
+            
+            // Ocultar mensaje después de 5 segundos
+            setTimeout(() => {
+                formMessage.style.display = 'none';
+            }, 5000);
+        }
+    </script>
 </body>
 </html>
