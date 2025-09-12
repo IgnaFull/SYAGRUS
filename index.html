@@ -7,12 +7,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary-color: #2e7d32; /* Verde principal similar al logo */
-            --secondary-color: #689f38; /* Verde secundario */
-            --accent-color: #8bc34a; /* Verde claro para acentos */
-            --dark-text: #212121; /* Texto oscuro */
-            --light-text: #f5f5f5; /* Texto claro */
-            --background-light: #f9f9f9; /* Fondo claro */
+            --primary-color: #2e7d32;
+            --secondary-color: #689f38;
+            --accent-color: #8bc34a;
+            --dark-text: #212121;
+            --light-text: #f5f5f5;
+            --background-light: #f9f9f9;
             --white: #ffffff;
             --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
@@ -28,10 +28,9 @@
             color: var(--dark-text);
             background-color: var(--background-light);
             line-height: 1.6;
-            padding-top: 80px; /* Para compensar la navbar fija */
+            padding-top: 80px;
         }
         
-        /* Header y Navegación - VERSIÓN MODERNIZADA */
         header {
             background-color: var(--white);
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.09);
@@ -86,7 +85,6 @@
             transform: rotate(5deg);
         }
         
-        /* Menú de Navegación Moderno */
         .nav-menu {
             display: flex;
             list-style: none;
@@ -115,7 +113,6 @@
             transform: translateY(-2px);
         }
         
-        /* Efecto de subrayado animado */
         .nav-menu a::after {
             content: '';
             position: absolute;
@@ -133,7 +130,6 @@
             width: 60%;
         }
         
-        /* Elemento activo */
         .nav-menu a.active {
             color: var(--primary-color);
             background: rgba(46, 125, 50, 0.12);
@@ -143,7 +139,6 @@
             width: 60%;
         }
         
-        /* Botón de menú móvil */
         .menu-toggle {
             display: none;
             background: none;
@@ -158,7 +153,6 @@
             color: var(--primary-color);
         }
         
-        /* Responsive */
         @media (max-width: 900px) {
             .menu-toggle {
                 display: block;
@@ -193,7 +187,6 @@
             }
         }
         
-        /* Hero Section */
         .hero {
             background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('assets/syagrus.jpg');
             background-size: cover;
@@ -240,7 +233,6 @@
             background-color: var(--secondary-color);
         }
         
-        /* About Section */
         .section {
             padding: 80px 0;
         }
@@ -285,7 +277,6 @@
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
         
-        /* Services Section */
         .services {
             background-color: var(--white);
         }
@@ -333,7 +324,6 @@
             margin-bottom: 10px;
         }
         
-        /* Team Section */
         .team-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -362,7 +352,6 @@
             color: #666;
         }
         
-        /* Contact Section */
         .contact {
             background-color: var(--white);
         }
@@ -419,30 +408,6 @@
             resize: vertical;
         }
         
-        .send-options {
-            display: flex;
-            gap: 15px;
-            margin-top: 20px;
-        }
-        
-        .btn-whatsapp {
-            background-color: #25D366;
-            flex: 1;
-        }
-        
-        .btn-email {
-            background-color: #EA4335;
-            flex: 1;
-        }
-        
-        .btn-whatsapp:hover {
-            background-color: #128C7E;
-        }
-        
-        .btn-email:hover {
-            background-color: #D93025;
-        }
-        
         .form-message {
             margin-top: 20px;
             padding: 12px;
@@ -462,7 +427,7 @@
             border: 1px solid #f5c6cb;
         }
 
-          .loading {
+        .loading {
             display: inline-block;
             width: 20px;
             height: 20px;
@@ -472,11 +437,10 @@
             animation: spin 1s ease-in-out infinite;
         }
 
-         @keyframes spin {
+        @keyframes spin {
             to { transform: rotate(360deg); }
         }
         
-        /* Footer */
         footer {
             background-color: var(--primary-color);
             color: var(--light-text);
@@ -524,10 +488,7 @@
             padding-top: 20px;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
-
         
-        
-        /* Responsive */
         @media (max-width: 768px) {
             .hero h1 {
                 font-size: 2rem;
@@ -542,16 +503,10 @@
                 padding-right: 0;
                 margin-bottom: 30px;
             }
-            
-            .send-options {
-                flex-direction: column;
-            }
-
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
     <header id="header">
         <div class="container">
             <nav class="navbar">
@@ -572,7 +527,6 @@
         </div>
     </header>
 
-    <!-- Hero Section -->
     <section id="inicio" class="hero">
         <div class="hero-content">
             <h1>TRANSFORMAMOS TU ESPACIO</h1>
@@ -581,7 +535,6 @@
         </div>
     </section>
 
-    <!-- About Section -->
     <section id="nosotros" class="section">
         <div class="container">
             <div class="section-title">
@@ -602,7 +555,6 @@
         </div>
     </section>
 
-    <!-- Services Section -->
     <section id="servicios" class="section services">
         <div class="container">
             <div class="section-title">
@@ -668,7 +620,6 @@
         </div>
     </section>
 
-    <!-- Team Section -->
     <section id="equipo" class="section">
         <div class="container">
             <div class="section-title">
@@ -690,7 +641,6 @@
         </div>
     </section>
 
-    <!-- Contact Section -->
     <section id="contacto" class="section contact">
         <div class="container">
             <div class="section-title">
@@ -701,8 +651,8 @@
                 <div class="contact-info">
                     <h3>Información de Contacto</h3>
                     <p>📍 Dirección: [Ingresar dirección]</p>
-                    <p>📞 Teléfono: +54 9 11 2345-6789</p>
-                    <p>✉️ Email: info@syagrus.com</p>
+                    <p>📞 Teléfono: +54 9 3624-590032</p>
+                    <p>✉️ Email: ignafullstack@gmail.com</p>
                     <p>🌐 Instagram: @syagrus.ip</p>
                     
                     <div style="margin-top: 30px;">
@@ -754,7 +704,6 @@
         </div>
     </section>
 
-    <!-- Footer -->
     <footer>
         <div class="container">
             <div class="footer-content">
@@ -841,111 +790,6 @@
             });
         });
 
-        // Funcionalidad del formulario de contacto
-        const btnWhatsApp = document.getElementById('btnWhatsApp');
-        const btnEmail = document.getElementById('btnEmail');
-        
-        // Validar formulario
-        function validateForm() {
-            const name = document.getElementById('name').value.trim();
-            const email = document.getElementById('email').value.trim();
-            const phone = document.getElementById('phone').value.trim();
-            const message = document.getElementById('message').value.trim();
-            
-            if (!name || !email || !phone || !message) {
-                showMessage('Por favor, complete todos los campos obligatorios.', 'error');
-                return false;
-            }
-            
-            if (!isValidEmail(email)) {
-                showMessage('Por favor, ingrese un email válido.', 'error');
-                return false;
-            }
-            
-            return true;
-        }
-        
-        function isValidEmail(email) {
-            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            return re.test(email);
-        }
-        
-        function showMessage(text, type) {
-            formMessage.textContent = text;
-            formMessage.className = 'form-message ' + type;
-            formMessage.style.display = 'block';
-            
-            // Ocultar mensaje después de 5 segundos
-            setTimeout(() => {
-                formMessage.style.display = 'none';
-            }, 5000);
-        }
-        
-        // Enviar por WhatsApp
-        btnWhatsApp.addEventListener('click', () => {
-            if (!validateForm()) return;
-            
-            const name = document.getElementById('name').value.trim();
-            const email = document.getElementById('email').value.trim();
-            const phone = document.getElementById('phone').value.trim();
-            const service = document.getElementById('service').value;
-            const message = document.getElementById('message').value.trim();
-            
-            // Número de teléfono de la empresa (cambiar por el número real)
-            const businessPhone = '5493624590032';
-            
-            // Crear mensaje para WhatsApp
-            let whatsappMessage = `Hola, me interesa solicitar información sobre sus servicios.\n\n`;
-            whatsappMessage += `*Nombre:* ${name}\n`;
-            whatsappMessage += `*Email:* ${email}\n`;
-            whatsappMessage += `*Teléfono:* ${phone}\n`;
-            if (service) whatsappMessage += `*Servicio de interés:* ${service}\n`;
-            whatsappMessage += `*Mensaje:* ${message}`;
-            
-            // Codificar el mensaje para URL
-            const encodedMessage = encodeURIComponent(whatsappMessage);
-            
-            // Abrir WhatsApp
-            window.open(`https://wa.me/${businessPhone}?text=${encodedMessage}`, '_blank');
-            
-            showMessage('Redirigiendo a WhatsApp... Complete el envío del mensaje allí.', 'success');
-        });
-        
-        // Enviar por Email
-        btnEmail.addEventListener('click', () => {
-            if (!validateForm()) return;
-            
-            const name = document.getElementById('name').value.trim();
-            const email = document.getElementById('email').value.trim();
-            const phone = document.getElementById('phone').value.trim();
-            const service = document.getElementById('service').value;
-            const message = document.getElementById('message').value.trim();
-            
-            // Email de la empresa (cambiar por el email real)
-            const businessEmail = 'ignafullstack@gmail.com';
-            
-            // Asunto del email
-            const subject = `Consulta de ${name} - Syagrus`;
-            
-            // Cuerpo del email
-            let emailBody = `Nombre: ${name}\n`;
-            emailBody += `Email: ${email}\n`;
-            emailBody += `Teléfono: ${phone}\n`;
-            if (service) emailBody += `Servicio de interés: ${service}\n`;
-            emailBody += `Mensaje:\n${message}`;
-            
-            // Codificar para mailto
-            const encodedSubject = encodeURIComponent(subject);
-            const encodedBody = encodeURIComponent(emailBody);
-            
-            // Abrir cliente de email
-            window.location.href = `mailto:${businessEmail}?subject=${encodedSubject}&body=${encodedBody}`;
-            
-            showMessage('Abriendo cliente de correo... Complete el envío del email allí.', 'success');
-        });
-
-         // [Todo el JavaScript anterior para el menú]
-        
         // Configuración para n8n - Reemplaza con tu webhook URL
         const N8N_WEBHOOK_URL = 'https://ignafull.app.n8n.cloud/webhook/syagrus-contact';
         
@@ -1001,7 +845,6 @@
             }
         });
         
-        // Validar formulario (función existente)
         function validateForm() {
             const name = document.getElementById('name').value.trim();
             const email = document.getElementById('email').value.trim();
