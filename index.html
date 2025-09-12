@@ -15,6 +15,7 @@
             --background-light: #f9f9f9;
             --white: #ffffff;
             --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            
         }
         
         * {
@@ -32,7 +33,7 @@
         }
         
         header {
-            background-color: var(--white);
+            background-color: #FEFBF4;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.09);
             position: fixed;
             width: 100%;
@@ -75,9 +76,9 @@
         }
 
         .logoicon {
-            width: 45px;
-            height: 45px;
-            margin-right: 12px;
+            width: 75px;
+            height: 75px;
+            margin-right: 5px;
             transition: var(--transition);
         }
         
@@ -503,6 +504,16 @@
                 padding-right: 0;
                 margin-bottom: 30px;
             }
+            .contact-info a {
+                color: #2e7d32;
+                text-decoration: none;
+                transition: color 0.3s ease;
+            }
+
+            .contact-info a:hover {
+                color: #689f38;
+                text-decoration: underline;
+            }
         }
     </style>
 </head>
@@ -511,7 +522,7 @@
         <div class="container">
             <nav class="navbar">
                 <a href="#" class="logo">
-                    <img src="assets/logo.png" alt="logo" class="logoicon">SYAGRUS
+                    <img src="assets/logo.jpg" alt="logo" class="logoicon">
                 </a>
                 <button class="menu-toggle" id="menuToggle">
                     <i class="fas fa-bars"></i>
@@ -651,10 +662,13 @@
                 <div class="contact-info">
                     <h3>Información de Contacto</h3>
                     <p>📍 Dirección: [Ingresar dirección]</p>
-                    <p>📞 Teléfono: +54 9 3624-590032</p>
-                    <p>✉️ Email: ignafullstack@gmail.com</p>
-                    <p>🌐 Instagram: @syagrus.ip</p>
-                    
+                    <p>📞 Teléfono:  +54 9 3624-257337</p>
+                    <p>✉️ Email: syagrusing.p@gmail.com </p>
+                    <p>
+                        <i class="fab fa-instagram"></i> 
+                        Instagram: 
+                        <a href="https://www.instagram.com/syagrus.ip/" target="_blank">@syagrus.ip</a>
+                    </p>
                     <div style="margin-top: 30px;">
                         <h3>Horario de Atención</h3>
                         <p>Lunes a Viernes: 8:00 - 18:00</p>
@@ -722,8 +736,8 @@
                 </div>
                 <div class="footer-section">
                     <h3>Contacto</h3>
-                    <p>📞 +54 9 3624-590032</p>
-                    <p>✉️ ignafullstack@gmail.com</p>
+                    <p>📞 +54 9 3624-257337</p>
+                    <p>✉️ syagrusing.p@gmail.com</p>
                     <div class="social-links">
                         <a href="https://www.instagram.com/syagrus.ip/" target="_blank">
                             <i class="fab fa-instagram"></i> Instagram
@@ -790,8 +804,8 @@
             });
         });
 
-        // Configuración para n8n - Reemplaza con tu webhook URL
-        const N8N_WEBHOOK_URL = 'https://ignafull.app.n8n.cloud/webhook/syagrus-contact';
+        // Configuración para n8n - ACTUALIZA ESTA URL con tu webhook real
+        const N8N_WEBHOOK_URL = 'https://ignafull.app.n8n.cloud/webhook/ /syagrus-contact';
         
         // Form submission con n8n
         const contactForm = document.getElementById('contactForm');
@@ -807,6 +821,7 @@
             // Mostrar estado de carga
             submitBtn.disabled = true;
             submitBtn.innerHTML = '<span class="loading"></span> Enviando...';
+            formMessage.style.display = 'none';
             
             try {
                 // Recopilar datos del formulario
@@ -820,6 +835,8 @@
                     source: 'Syagrus Website'
                 };
                 
+                console.log('Enviando datos:', formData);
+                
                 // Enviar a n8n
                 const response = await fetch(N8N_WEBHOOK_URL, {
                     method: 'POST',
@@ -829,15 +846,18 @@
                     body: JSON.stringify(formData)
                 });
                 
+                const responseData = await response.text();
+                console.log('Respuesta del servidor:', responseData);
+                
                 if (response.ok) {
                     showMessage('¡Consulta enviada con éxito! Te contactaremos pronto.', 'success');
                     contactForm.reset();
                 } else {
-                    throw new Error('Error en el servidor');
+                    throw new Error(`Error ${response.status}: ${response.statusText}`);
                 }
             } catch (error) {
                 console.error('Error:', error);
-                showMessage('Error al enviar el mensaje. Por favor, intentá nuevamente.', 'error');
+                showMessage('Error al enviar el mensaje. Por favor, intentá nuevamente o contactanos directamente por teléfono.', 'error');
             } finally {
                 // Restaurar botón
                 submitBtn.disabled = false;
