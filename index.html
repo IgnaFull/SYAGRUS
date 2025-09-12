@@ -15,7 +15,6 @@
             --background-light: #f9f9f9;
             --white: #ffffff;
             --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            
         }
         
         * {
@@ -804,7 +803,7 @@
             });
         });
 
-        // Configuración para n8n - ACTUALIZA ESTA URL con tu webhook real
+        // Configuración para n8n - URL CORREGIDA (sin espacio)
         const N8N_WEBHOOK_URL = 'https://ignafull.app.n8n.cloud/webhook/syagrus-contact';
         
         // Form submission con n8n
@@ -846,13 +845,13 @@
                     body: JSON.stringify(formData)
                 });
                 
-                const responseData = await response.text();
-                console.log('Respuesta del servidor:', responseData);
-                
                 if (response.ok) {
                     showMessage('¡Consulta enviada con éxito! Te contactaremos pronto.', 'success');
                     contactForm.reset();
                 } else {
+                    // Intentar obtener más información del error
+                    const errorText = await response.text();
+                    console.error('Error del servidor:', response.status, errorText);
                     throw new Error(`Error ${response.status}: ${response.statusText}`);
                 }
             } catch (error) {
